@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import os
 from datetime import datetime
 import json
-
+from concurrent.futures import ThreadPoolExecutor
 
 class CryptoInfluencerApp:
     def __init__(self):
@@ -16,8 +16,7 @@ class CryptoInfluencerApp:
         st.set_page_config(layout="wide")
 
         self.influencers_list = {influencer for data in self.influencer_data_list.values() for entry in data for influencer in entry}
-        self.selected_influencers = st.sidebar.multiselect('Select Influencers', options=self.influencers_list,
-                                                           default=self.influencers_list)
+        self.selected_influencers = st.sidebar.multiselect('Select Influencers', options=self.influencers_list, default=self.influencers_list)
         self.cryptos = self.get_file_names()
 
     def return_list_of_tickers_from_price_files(self):
@@ -31,7 +30,7 @@ class CryptoInfluencerApp:
                 tickers_list.sort()
         return tickers_list
 
-    @st.cache_data
+    @st.cache_data(ttl=600)
     def load_price_data(_self, crypto):
         try:
             return pd.read_csv(f'data/crypto_prices/{crypto}_price_data_recent.csv')
@@ -75,6 +74,11 @@ class CryptoInfluencerApp:
 
         return fig
 
+    def process_crypto(self, crypto):
+        price_data = self.load_price_data(crypto)
+        if price_data is not None:
+            return crypto, price_data, self.influencer_data_list[crypto]
+
     def run(self):
         charts_per_page = 10
         total_cryptos = len(self.cryptos)
@@ -87,18 +91,17 @@ class CryptoInfluencerApp:
             start_index = 0
             end_index = 10
         else:
-            start_index = ((selected_page - 1) * charts_per_page) + 1
+            start_index = ((selected_page - 1) * charts_per_page)
             end_index = min(start_index + charts_per_page, total_cryptos)
 
         end_index = min(end_index, total_cryptos)
 
-        for i, crypto in enumerate(self.cryptos[start_index:end_index]):
-            price_data = self.load_price_data(crypto)
-            if price_data is None:
-                continue
+        with ThreadPoolExecutor() as executor:
+            crypto_data = executor.map(self.process_crypto, self.cryptos[start_index:end_index])
 
+        for crypto, price_data, influencer_data in crypto_data:
             with st.container():
-                st.plotly_chart(self.generate_chart(crypto, price_data, self.influencer_data_list[crypto]))
+                st.plotly_chart(self.generate_chart(crypto, price_data, influencer_data))
 
 app = CryptoInfluencerApp()
 app.run()
