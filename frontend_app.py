@@ -44,6 +44,7 @@ class CryptoInfluencerApp:
         y_values = [1 - i * 0.05 for i in range(len(self.selected_influencers))]
 
         annotations = []
+        shapes = []  # List to store vertical lines for day borders
 
         # Calculate the percentage of the y-axis range for annotation placement
         y_range_percentage = 0.1  # Adjust this value based on your preference
@@ -72,7 +73,22 @@ class CryptoInfluencerApp:
                     )
                 )
 
+                timestamp_at_midnight = timestamp.replace(hour=0, minute=0, second=0, microsecond=0)
+
+                # Add vertical line for day border
+                shapes.append(
+                    go.layout.Shape(
+                        type='line',
+                        x0=timestamp_at_midnight,
+                        x1=timestamp_at_midnight,
+                        y0=price_data['close'].min(),
+                        y1=price_data['close'].max(),
+                        line=dict(color='black', width=2)
+                    )
+                )
+
         fig.update_layout(annotations=annotations)
+        fig.update_layout(shapes=shapes)  # Add day borders to the layout
 
         width_factor = max(len(price_data['timestamp']) / 350, 1)
         fig.update_layout(width=width_factor * 1000)
