@@ -116,6 +116,9 @@ class CryptoInfluencerApp:
             start_index = ((selected_page - 1) * charts_per_page)
             end_index = min(start_index + charts_per_page, total_cryptos)
 
+        print(start_index)
+        print(end_index)
+
         end_index = min(end_index, total_cryptos)
 
         with ThreadPoolExecutor() as executor:
