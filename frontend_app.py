@@ -49,7 +49,7 @@ class CryptoInfluencerApp:
         midnight_timestamps_list = midnight_timestamps.to_list()
         return midnight_timestamps_list
 
-    def generate_chart(self, currency, price_data, influencer_data):
+    def generate_chart(self, currency, price_data, influencer_data_list):
         fig = px.line(price_data, x='timestamp', y='close', title=f'{currency} Price Chart')
 
         y_values = [1 - i * 0.05 for i in range(len(self.selected_influencers))]
@@ -57,27 +57,30 @@ class CryptoInfluencerApp:
         annotations = []
         shapes = []  # List to store vertical lines for day borders
 
-        for i, influencer_data in enumerate(influencer_data):
-            influencer = list(influencer_data.keys())[0]
-            if influencer in self.selected_influencers:
-                timestamp = datetime.strptime(influencer_data[influencer], "%Y-%m-%dT%H:%M:%S.000Z")
+        for i, influencer_data in enumerate(influencer_data_list):  # Change the loop variable name
+            influencer_entry = list(influencer_data.keys())[0]
+            if influencer_entry in self.selected_influencers:
+                timestamp = datetime.strptime(influencer_data[influencer_entry], "%Y-%m-%dT%H:%M:%S.000Z")
 
                 # Calculate the y_value as a percentage of the y-axis range
                 y_range = price_data['close'].max() - price_data['close'].min()
                 y_value = price_data['close'].min() + y_range * y_values[i % len(y_values)]
+                
+                annotation_text = f'{influencer_entry}'
 
                 annotations.append(
                     go.layout.Annotation(
                         x=timestamp,
                         y=y_value,
-                        text=f'{influencer}',
+                        text=annotation_text,
                         showarrow=True,
                         arrowhead=2,
                         arrowsize=1,
                         arrowwidth=2,
                         arrowcolor='red',
                         ax=0,
-                        ay=-40
+                        ay=-40,
+                        hovertext=timestamp.strftime("%Y-%m-%d %H:%M:%S"),  # Use a single value for hovertext
                     )
                 )
 
