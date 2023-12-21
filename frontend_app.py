@@ -16,7 +16,6 @@ class CryptoInfluencerApp:
         st.set_page_config(layout="wide")
 
         self.influencers_list = {influencer for data in self.influencer_data_list.values() for entry in data for influencer in entry}
-        self.selected_influencers = st.sidebar.multiselect('Select Influencers', options=self.influencers_list, default=self.influencers_list)
         self.cryptos = self.get_file_names()
 
     def return_list_of_tickers_from_price_files(self):
@@ -133,6 +132,9 @@ class CryptoInfluencerApp:
         print(end_index)
 
         end_index = min(end_index, total_cryptos)
+
+        # Move the page selector above the influencer selector
+        self.selected_influencers = st.sidebar.multiselect('Select Influencers', options=self.influencers_list, default=self.influencers_list)
 
         with ThreadPoolExecutor() as executor:
             crypto_data = executor.map(self.process_crypto, self.cryptos[start_index:end_index])
