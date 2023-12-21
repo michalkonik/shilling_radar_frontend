@@ -33,10 +33,21 @@ class CryptoInfluencerApp:
     @st.cache_data(ttl=600)
     def load_price_data(_self, crypto):
         try:
-            return pd.read_csv(f'data/crypto_prices/{crypto}_price_data_recent.csv')
+            price_data = pd.read_csv(f'data/crypto_prices/{crypto}_price_data_recent.csv', parse_dates=['timestamp'])
+            return price_data
         except FileNotFoundError:
             st.warning(f"File with prices not found for {crypto}. Skipping...")
             return None
+        
+    def get_midnight_timestamps(self, data_csv):
+        data_csv['date'] = data_csv['timestamp'].dt.date
+
+        earliest_date = data_csv['date'].min()
+        latest_date = data_csv['date'].max()
+
+        midnight_timestamps = pd.date_range(start=earliest_date, end=latest_date, freq='D')
+        midnight_timestamps_list = midnight_timestamps.to_list()
+        return midnight_timestamps_list
 
     def generate_chart(self, currency, price_data, influencer_data):
         fig = px.line(price_data, x='timestamp', y='close', title=f'{currency} Price Chart')
@@ -45,9 +56,6 @@ class CryptoInfluencerApp:
 
         annotations = []
         shapes = []  # List to store vertical lines for day borders
-
-        # Calculate the percentage of the y-axis range for annotation placement
-        y_range_percentage = 0.1  # Adjust this value based on your preference
 
         for i, influencer_data in enumerate(influencer_data):
             influencer = list(influencer_data.keys())[0]
@@ -73,23 +81,25 @@ class CryptoInfluencerApp:
                     )
                 )
 
-                timestamp_at_midnight = timestamp.replace(hour=0, minute=0, second=0, microsecond=0)
+        midnight_timestamps = self.get_midnight_timestamps(price_data)
 
-                # Add vertical line for day border
-                shapes.append(
-                    go.layout.Shape(
-                        type='line',
-                        x0=timestamp_at_midnight,
-                        x1=timestamp_at_midnight,
-                        y0=price_data['close'].min(),
-                        y1=price_data['close'].max(),
-                        line=dict(color='black', width=2)
-                    )
+        for timestamp_at_midnight in midnight_timestamps:
+            shapes.append(
+                go.layout.Shape(
+                    type='line',
+                    x0=timestamp_at_midnight,
+                    x1=timestamp_at_midnight,
+                    y0=price_data['close'].min(),
+                    y1=price_data['close'].max(),
+                    line=dict(color='black', width=2)
                 )
+            )
+
+        # Update layout to set x-axis tick frequency to every second day
+        fig.update_layout(xaxis=dict(tickmode='linear', tick0=midnight_timestamps[0], dtick=2 * (midnight_timestamps[1] - midnight_timestamps[0])))
 
         fig.update_layout(annotations=annotations)
-        fig.update_layout(shapes=shapes)  # Add day borders to the layout
-
+        fig.update_layout(shapes=shapes)
         width_factor = max(len(price_data['timestamp']) / 350, 1)
         fig.update_layout(width=width_factor * 1000)
         fig.update_layout(yaxis=dict(range=[price_data['close'].min(), price_data['close'].max()]))
