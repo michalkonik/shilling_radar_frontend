@@ -25,10 +25,7 @@ class CryptoInfluencerApp:
         self.cryptos = self.get_file_names()
 
     def return_list_of_tickers_from_price_files(self):
-        with open(self.final_output_file_name, "r") as existing_file:
-            data_structure = json.load(existing_file)
-
-        tickers_list = list(data_structure.keys())
+        tickers_list = list(self.influencer_data_list.keys())
         return tickers_list
     
     def get_file_names(self, directory_path="data/crypto_prices"):
