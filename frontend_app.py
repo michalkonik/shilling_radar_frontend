@@ -45,11 +45,17 @@ class CryptoInfluencerApp:
 
         annotations = []
 
+        # Calculate the percentage of the y-axis range for annotation placement
+        y_range_percentage = 0.1  # Adjust this value based on your preference
+
         for i, influencer_data in enumerate(influencer_data):
             influencer = list(influencer_data.keys())[0]
             if influencer in self.selected_influencers:
                 timestamp = datetime.strptime(influencer_data[influencer], "%Y-%m-%dT%H:%M:%S.000Z")
-                y_value = price_data['close'].max() * y_values[i % len(y_values)]
+
+                # Calculate the y_value as a percentage of the y-axis range
+                y_range = price_data['close'].max() - price_data['close'].min()
+                y_value = price_data['close'].min() + y_range * y_values[i % len(y_values)]
 
                 annotations.append(
                     go.layout.Annotation(
@@ -80,7 +86,7 @@ class CryptoInfluencerApp:
             return crypto, price_data, self.influencer_data_list[crypto]
 
     def run(self):
-        charts_per_page = 10
+        charts_per_page = 6
         total_cryptos = len(self.cryptos)
 
         num_pages = -(-total_cryptos // charts_per_page)
@@ -89,7 +95,7 @@ class CryptoInfluencerApp:
 
         if selected_page == 1:
             start_index = 0
-            end_index = 10
+            end_index = charts_per_page
         else:
             start_index = ((selected_page - 1) * charts_per_page)
             end_index = min(start_index + charts_per_page, total_cryptos)
