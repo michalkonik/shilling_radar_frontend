@@ -39,6 +39,14 @@ class CryptoInfluencerApp:
         tickers_list.sort()
         return tickers_list
 
+    @st.cache_data
+    def load_price_data(_self, crypto):
+        try:
+            return pd.read_csv(f'data/crypto_prices/{crypto}_price_data_recent.csv')
+        except FileNotFoundError:
+            st.warning(f"File with prices not found for {crypto}. Skipping...")
+            return None
+
     def generate_chart(self, currency, price_data, influencer_data):
         fig = px.line(price_data, x='timestamp', y='close', title=f'{currency} Price Chart')
         filtered_influencers = self.selected_influencers
@@ -96,18 +104,13 @@ class CryptoInfluencerApp:
             start_index = ((selected_page - 1) * charts_per_page) + 1
             end_index = min(start_index + charts_per_page, total_cryptos)
 
-
         end_index = min(end_index, total_cryptos)
 
-        print(start_index)
-        print(end_index)
-
         for i, crypto in enumerate(self.cryptos[start_index:end_index]):
-            try:
-                price_data = pd.read_csv(f'data/crypto_prices/{crypto}_price_data_recent.csv')
-            except FileNotFoundError:
-                print(f"File with prices not found for {crypto} :( skipping...")
+            price_data = self.load_price_data(crypto)
+            if price_data is None:
                 continue
+            
             with st.container():
                 st.plotly_chart(self.generate_chart(crypto, price_data, self.influencer_data_list[crypto]))
 
