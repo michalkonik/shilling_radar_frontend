@@ -119,7 +119,14 @@ class CryptoInfluencerApp:
 
         num_pages = -(-total_cryptos // charts_per_page)
 
-        selected_page = st.sidebar.selectbox('Select Page', range(1, num_pages + 1), index=0)
+        # Read the page parameter from the URL
+        selected_page = st.experimental_get_query_params().get('page', [1])[0]
+        selected_page = int(selected_page)
+
+        selected_page = st.sidebar.selectbox('Select Page', range(1, num_pages + 1), index=selected_page - 1)
+
+        # Update URL with the selected page
+        st.experimental_set_query_params(page=selected_page)
 
         if selected_page == 1:
             start_index = 0
