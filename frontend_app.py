@@ -13,9 +13,10 @@ class CryptoInfluencerApp:
         with open(self.final_output_file_name) as f:
             self.influencer_data_list = json.load(f)
 
+        self.influencers_list = list({author for token in self.influencer_data_list.values() for tweet in token for author in [tweet["author"]]})
+
         st.set_page_config(layout="wide")
 
-        self.influencers_list = {influencer for data in self.influencer_data_list.values() for entry in data for influencer in entry}
         self.cryptos = self.get_file_names()
 
     def return_list_of_tickers_from_price_files(self):
@@ -57,15 +58,17 @@ class CryptoInfluencerApp:
         shapes = []  # List to store vertical lines for day borders
 
         for i, influencer_data in enumerate(influencer_data_list):  # Change the loop variable name
-            influencer_entry = list(influencer_data.keys())[0]
-            if influencer_entry in self.selected_influencers:
-                timestamp = datetime.strptime(influencer_data[influencer_entry], "%Y-%m-%dT%H:%M:%S.000Z")
+            #author_list = [item["author"] for item in influencer_data]
+            #influencer_entry = list(influencer_data.keys())[0]
+            influencer_username = influencer_data["author"]
+            if influencer_username in self.selected_influencers:
+                timestamp = datetime.strptime(influencer_data["created_at"], "%Y-%m-%dT%H:%M:%S.000Z")
 
                 # Calculate the y_value as a percentage of the y-axis range
                 y_range = price_data['close'].max() - price_data['close'].min()
                 y_value = price_data['close'].min() + y_range * y_values[i % len(y_values)]
                 
-                annotation_text = f'{influencer_entry}'
+                annotation_text = f'{influencer_username}'
 
                 annotations.append(
                     go.layout.Annotation(
