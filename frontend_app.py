@@ -55,20 +55,17 @@ class CryptoInfluencerApp:
         y_values = [1 - i * 0.05 for i in range(len(self.selected_influencers))]
 
         annotations = []
-        shapes = []  # List to store vertical lines for day borders
+        shapes = [] 
 
-        for i, influencer_data in enumerate(influencer_data_list):  # Change the loop variable name
-            #author_list = [item["author"] for item in influencer_data]
-            #influencer_entry = list(influencer_data.keys())[0]
+        for i, influencer_data in enumerate(influencer_data_list):
             influencer_username = influencer_data["author"]
             if influencer_username in self.selected_influencers:
                 timestamp = datetime.strptime(influencer_data["created_at"], "%Y-%m-%dT%H:%M:%S.000Z")
 
-                # Calculate the y_value as a percentage of the y-axis range
                 y_range = price_data['close'].max() - price_data['close'].min()
                 y_value = price_data['close'].min() + y_range * y_values[i % len(y_values)]
-                
-                annotation_text = f'{influencer_username}'
+
+                annotation_text =  f'<a href="{influencer_data["tweet_url"]}" target="_blank">{influencer_username}</a>'
 
                 annotations.append(
                     go.layout.Annotation(
@@ -82,7 +79,7 @@ class CryptoInfluencerApp:
                         arrowcolor='red',
                         ax=0,
                         ay=-40,
-                        hovertext=timestamp.strftime("%Y-%m-%d %H:%M:%S"),  # Use a single value for hovertext
+                        hovertext=timestamp.strftime("%Y-%m-%d %H:%M:%S"),
                     )
                 )
 
