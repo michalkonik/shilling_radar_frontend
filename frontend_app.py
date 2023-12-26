@@ -120,13 +120,18 @@ class CryptoInfluencerApp:
         num_pages = -(-total_cryptos // charts_per_page)
 
         # Read the page parameter from the URL
-        selected_page = st.experimental_get_query_params().get('page', [1])[0]
-        selected_page = int(selected_page)
+        url_params = st.experimental_get_query_params()
+        selected_page = int(url_params.get('page', [1])[0])
+        selected_ticker = url_params.get('ticker', [None])[0]
+
+        if selected_ticker is not None:
+            # Display the chart for the chosen cryptocurrency only
+            self.cryptos = [selected_ticker]
 
         selected_page = st.sidebar.selectbox('Select Page', range(1, num_pages + 1), index=selected_page - 1)
 
         # Update URL with the selected page
-        st.experimental_set_query_params(page=selected_page)
+        st.experimental_set_query_params(page=selected_page, ticker=selected_ticker)
 
         if selected_page == 1:
             start_index = 0
