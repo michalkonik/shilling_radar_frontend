@@ -7,6 +7,7 @@ from datetime import datetime
 import json
 from concurrent.futures import ThreadPoolExecutor
 
+
 class CryptoInfluencerApp:
     def __init__(self):
         self.final_output_file_name = 'data/stats/final_output.json'
@@ -14,6 +15,7 @@ class CryptoInfluencerApp:
             self.influencer_data_list = json.load(f)
 
         self.influencers_list = list({author for token in self.influencer_data_list.values() for tweet in token for author in [tweet["author"]]})
+
         st.set_page_config(layout="wide")
 
         self.cryptos = self.get_file_names()
@@ -118,19 +120,7 @@ class CryptoInfluencerApp:
 
         num_pages = -(-total_cryptos // charts_per_page)
 
-        # Read the page parameter from the URL
-        url_params = st.experimental_get_query_params()
-        selected_page = int(url_params.get('page', [1])[0])
-        selected_tickers = url_params.get('ticker', [None])[0]
-
-        if selected_tickers is not None:
-            # Display the charts for the chosen cryptocurrencies
-            self.cryptos = selected_tickers.split(',')
-
-        selected_page = st.sidebar.selectbox('Select Page', range(1, num_pages + 1), index=selected_page - 1)
-
-        # Update URL with the selected page and tickers
-        st.experimental_set_query_params(page=selected_page, ticker=selected_tickers)
+        selected_page = st.sidebar.selectbox('Select Page', range(1, num_pages + 1), index=0)
 
         if selected_page == 1:
             start_index = 0
@@ -138,6 +128,9 @@ class CryptoInfluencerApp:
         else:
             start_index = ((selected_page - 1) * charts_per_page)
             end_index = min(start_index + charts_per_page, total_cryptos)
+
+        print(start_index)
+        print(end_index)
 
         end_index = min(end_index, total_cryptos)
 
@@ -150,6 +143,7 @@ class CryptoInfluencerApp:
         for crypto, price_data, influencer_data in crypto_data:
             with st.container():
                 st.plotly_chart(self.generate_chart(crypto, price_data, influencer_data))
+
 
 app = CryptoInfluencerApp()
 app.run()
