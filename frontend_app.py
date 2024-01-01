@@ -129,8 +129,6 @@ class CryptoInfluencerApp:
                 st.warning("Please select between 1 and 8 cryptocurrencies. Going to 1st page...")
 
     def run(self):
-        import ipdb
-        #ipdb.set_trace()
         self.set_tickers_from_multiselect_window()
 
         charts_per_page = 6
