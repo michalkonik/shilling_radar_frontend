@@ -16,12 +16,9 @@ class CryptoInfluencerApp:
         self.influencers_list = list({author for token in self.influencer_data_list.values() for tweet in token for author in [tweet["author"]]})
         st.set_page_config(layout="wide")
 
-        self.cryptos = self.get_file_names()
+        self.cryptos = self.return_list_of_tickers_from_price_files()
 
-    def return_list_of_tickers_from_price_files(self):
-        return list(self.influencer_data_list.keys())
-
-    def get_file_names(self, directory_path="data/crypto_prices"):
+    def return_list_of_tickers_from_price_files(self, directory_path="data/crypto_prices"):
         tickers_list = []
         for filename in os.listdir(directory_path):
             if os.path.isfile(os.path.join(directory_path, filename)):
@@ -179,8 +176,6 @@ class CryptoInfluencerApp:
         self.selected_influencers = st.sidebar.multiselect('Select Influencers', options=self.influencers_list, default=self.influencers_list)
         print("self.selected_influencers:")
         print(self.selected_influencers)
-
-        
 
         print("self.cryptos right before multithreading:")
         print(self.cryptos)

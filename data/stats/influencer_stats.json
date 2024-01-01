@@ -1,0 +1,820 @@
+{
+  "MacnBTC": {
+    "3m": {
+      "BTC": 37,
+      "ARK": 34,
+      "ETH": 17,
+      "LINK": 16,
+      "ORDI": 14
+    },
+    "2m": {
+      "ARK": 27,
+      "BTC": 26,
+      "ORDI": 14,
+      "SEI": 12,
+      "JST": 11
+    },
+    "1m": {
+      "BTC": 20,
+      "ARK": 18,
+      "ORDI": 14,
+      "SEI": 10,
+      "CELO": 8
+    },
+    "2w": {
+      "ORDI": 8,
+      "BTC": 8,
+      "SEI": 8,
+      "CELO": 8,
+      "ARK": 5
+    },
+    "1w": {
+      "SEI": 8,
+      "CELO": 8,
+      "BTC": 6,
+      "ARK": 5,
+      "ORDI": 4
+    },
+    "3d": {
+      "BTC": 2
+    },
+    "1d": {}
+  },
+  "CryptoLimbo_": {
+    "3m": {
+      "ARK": 15,
+      "JST": 13,
+      "RUNE": 11,
+      "DAI": 10,
+      "INJ": 10
+    },
+    "2m": {
+      "ARK": 13,
+      "JST": 12,
+      "DAI": 10,
+      "RUNE": 10,
+      "INJ": 9
+    },
+    "1m": {
+      "ARK": 9,
+      "DAI": 8,
+      "INJ": 7,
+      "KDA": 7,
+      "MOVR": 6
+    },
+    "2w": {
+      "DAI": 8,
+      "KDA": 7,
+      "ARK": 6,
+      "MOVR": 6,
+      "SOL": 4
+    },
+    "1w": {
+      "NEXO": 4,
+      "AUCTION": 2,
+      "AMP": 2,
+      "ARK": 1,
+      "DAI": 1
+    },
+    "3d": {
+      "NEXO": 2,
+      "DAI": 1,
+      "TRB": 1,
+      "KDA": 1
+    },
+    "1d": {
+      "KDA": 1
+    }
+  },
+  "pierre_crypt0": {
+    "3m": {
+      "JST": 69,
+      "ARK": 64,
+      "AMP": 27,
+      "COMP": 26,
+      "BTC": 21
+    },
+    "2m": {
+      "JST": 69,
+      "ARK": 64,
+      "AMP": 27,
+      "COMP": 26,
+      "BTC": 21
+    },
+    "1m": {
+      "ARK": 36,
+      "JST": 35,
+      "BTC": 19,
+      "COMP": 17,
+      "AMP": 16
+    },
+    "2w": {
+      "JST": 10,
+      "ARK": 9,
+      "BTC": 5,
+      "AUCTION": 3,
+      "SOL": 2
+    },
+    "1w": {
+      "ARK": 5,
+      "JST": 4,
+      "AUCTION": 3,
+      "DAI": 2,
+      "TRX": 2
+    },
+    "3d": {
+      "JST": 3,
+      "ARK": 1
+    },
+    "1d": {
+      "ARK": 1
+    }
+  },
+  "CryptoKaleo": {
+    "3m": {
+      "BTC": 112,
+      "JST": 46,
+      "ARK": 43,
+      "DOGE": 41,
+      "BONK": 27
+    },
+    "2m": {
+      "BTC": 87,
+      "DOGE": 41,
+      "JST": 39,
+      "ARK": 32,
+      "BONK": 27
+    },
+    "1m": {
+      "BTC": 30,
+      "BONK": 20,
+      "ARK": 13,
+      "PEPE": 12,
+      "GALA": 12
+    },
+    "2w": {
+      "BTC": 7,
+      "PEPE": 7,
+      "ETH": 6,
+      "ARK": 5,
+      "SOL": 4
+    },
+    "1w": {
+      "ETH": 6,
+      "ARK": 3,
+      "PEPE": 3,
+      "BONK": 2,
+      "SUI": 2
+    },
+    "3d": {
+      "JST": 1
+    },
+    "1d": {
+      "JST": 1
+    }
+  },
+  "0xLawliette": {
+    "3m": {
+      "JST": 76,
+      "BONK": 75,
+      "SOL": 38,
+      "ARK": 25,
+      "ETH": 23
+    },
+    "2m": {
+      "BONK": 70,
+      "JST": 60,
+      "SOL": 33,
+      "ETH": 17,
+      "ARK": 17
+    },
+    "1m": {
+      "BONK": 36,
+      "JST": 33,
+      "SOL": 17,
+      "ARK": 9,
+      "ETH": 5
+    },
+    "2w": {
+      "SOL": 10,
+      "JST": 8,
+      "BONK": 7,
+      "ETH": 4,
+      "SEI": 3
+    },
+    "1w": {
+      "SOL": 5,
+      "JST": 4,
+      "BONK": 3,
+      "SEI": 2,
+      "ARK": 1
+    },
+    "3d": {
+      "JST": 2,
+      "SOL": 1
+    },
+    "1d": {}
+  },
+  "edwardmorra_btc": {
+    "3m": {
+      "SOL": 29,
+      "ARK": 26,
+      "BONK": 22,
+      "BTC": 17,
+      "JST": 12
+    },
+    "2m": {
+      "SOL": 29,
+      "ARK": 26,
+      "BONK": 22,
+      "BTC": 17,
+      "JST": 12
+    },
+    "1m": {
+      "SOL": 28,
+      "ARK": 25,
+      "BONK": 22,
+      "JST": 11,
+      "BTC": 10
+    },
+    "2w": {
+      "SOL": 18,
+      "ARK": 11,
+      "BONK": 8,
+      "AUCTION": 7,
+      "JST": 7
+    },
+    "1w": {
+      "SOL": 6,
+      "ARK": 4,
+      "SUI": 4,
+      "MINA": 3,
+      "BONK": 2
+    },
+    "3d": {
+      "SOL": 2,
+      "AMP": 1,
+      "TRB": 1,
+      "USDC": 1
+    },
+    "1d": {}
+  },
+  "ImmortalCrypto": {
+    "3m": {
+      "BTC": 59,
+      "ETH": 47,
+      "SOL": 26,
+      "ARK": 25,
+      "LINK": 14
+    },
+    "2m": {
+      "BTC": 41,
+      "ETH": 35,
+      "SOL": 17,
+      "ARK": 15,
+      "LINK": 13
+    },
+    "1m": {
+      "BTC": 19,
+      "ETH": 8,
+      "SOL": 6,
+      "LINK": 6,
+      "JST": 5
+    },
+    "2w": {
+      "BTC": 2,
+      "ETH": 1,
+      "SOL": 1
+    },
+    "1w": {},
+    "3d": {},
+    "1d": {}
+  },
+  "CryptoGirlNova": {
+    "3m": {
+      "ARK": 236,
+      "BTC": 113,
+      "JST": 67,
+      "TRX": 46,
+      "ETH": 38
+    },
+    "2m": {
+      "ARK": 208,
+      "BTC": 95,
+      "JST": 56,
+      "TRX": 42,
+      "ETH": 33
+    },
+    "1m": {
+      "ARK": 105,
+      "BTC": 66,
+      "JST": 28,
+      "INJ": 26,
+      "TRX": 20
+    },
+    "2w": {
+      "ARK": 36,
+      "INJ": 19,
+      "JST": 16,
+      "TRX": 12,
+      "BTC": 8
+    },
+    "1w": {
+      "ARK": 18,
+      "JST": 11,
+      "TRX": 9,
+      "BTC": 7,
+      "KAS": 5
+    },
+    "3d": {
+      "ARK": 15,
+      "TRX": 8,
+      "BTC": 7,
+      "JST": 5,
+      "QNT": 3
+    },
+    "1d": {
+      "BTC": 6,
+      "ARK": 6,
+      "JST": 2,
+      "TRX": 1,
+      "TRB": 1
+    }
+  },
+  "MiddleChildPabk": {
+    "3m": {
+      "ARK": 37,
+      "AMP": 27,
+      "JST": 24,
+      "BEAM": 24,
+      "SOL": 13
+    },
+    "2m": {
+      "ARK": 30,
+      "AMP": 25,
+      "BEAM": 24,
+      "JST": 22,
+      "SOL": 7
+    },
+    "1m": {
+      "AMP": 13,
+      "ARK": 12,
+      "BEAM": 12,
+      "JST": 10,
+      "AVAX": 6
+    },
+    "2w": {
+      "AMP": 7,
+      "JST": 5,
+      "ARK": 5,
+      "BEAM": 3,
+      "AUCTION": 1
+    },
+    "1w": {
+      "AMP": 7,
+      "ARK": 4,
+      "JST": 3,
+      "AUCTION": 1,
+      "RNDR": 1
+    },
+    "3d": {
+      "AMP": 3,
+      "JST": 2,
+      "AUCTION": 1,
+      "ARK": 1,
+      "TRB": 1
+    },
+    "1d": {
+      "AMP": 1
+    }
+  },
+  "thedefivillain": {
+    "3m": {
+      "ARK": 73,
+      "BTC": 59,
+      "SOL": 56,
+      "BONK": 30,
+      "MEME": 30
+    },
+    "2m": {
+      "ARK": 51,
+      "SOL": 44,
+      "BTC": 36,
+      "BONK": 30,
+      "TRX": 25
+    },
+    "1m": {
+      "ARK": 23,
+      "SOL": 21,
+      "BONK": 18,
+      "ORDI": 14,
+      "BTC": 13
+    },
+    "2w": {
+      "ARK": 9,
+      "BONK": 8,
+      "SOL": 7,
+      "MEME": 4,
+      "TRX": 4
+    },
+    "1w": {
+      "BONK": 4,
+      "SEI": 3,
+      "ETH": 2,
+      "MEME": 2,
+      "TRX": 2
+    },
+    "3d": {
+      "BONK": 1,
+      "ORDI": 1,
+      "MEME": 1,
+      "TRX": 1,
+      "JTO": 1
+    },
+    "1d": {
+      "JTO": 1,
+      "LDO": 1
+    }
+  },
+  "crypthoem": {
+    "3m": {
+      "ARK": 177,
+      "AVAX": 52,
+      "AMP": 47,
+      "JST": 44,
+      "TRX": 34
+    },
+    "2m": {
+      "ARK": 177,
+      "AVAX": 52,
+      "AMP": 47,
+      "JST": 44,
+      "TRX": 34
+    },
+    "1m": {
+      "ARK": 92,
+      "AVAX": 37,
+      "JST": 24,
+      "TRX": 21,
+      "AMP": 19
+    },
+    "2w": {
+      "ARK": 31,
+      "ARB": 10,
+      "TRX": 9,
+      "JST": 8,
+      "AMP": 7
+    },
+    "1w": {
+      "ARK": 17,
+      "TRX": 7,
+      "ARB": 6,
+      "JST": 4,
+      "AVAX": 4
+    },
+    "3d": {
+      "ARK": 6,
+      "BTC": 3,
+      "ARB": 3,
+      "AVAX": 2,
+      "ETH": 1
+    },
+    "1d": {
+      "ARK": 4,
+      "ARB": 3,
+      "BTC": 1,
+      "JST": 1,
+      "AMP": 1
+    }
+  },
+  "OnchainDataNerd": {
+    "3m": {
+      "ETH": 70,
+      "AMP": 54,
+      "JST": 35,
+      "ARK": 19,
+      "MKR": 18
+    },
+    "2m": {
+      "ETH": 60,
+      "JST": 27,
+      "AMP": 22,
+      "ARK": 14,
+      "USDC": 14
+    },
+    "1m": {
+      "ETH": 15,
+      "JST": 14,
+      "WLD": 7,
+      "ARK": 6,
+      "IMX": 6
+    },
+    "2w": {
+      "JST": 8,
+      "ETH": 7,
+      "IMX": 6,
+      "USDC": 6,
+      "ARK": 4
+    },
+    "1w": {
+      "USDC": 6,
+      "ETH": 5,
+      "BTC": 2,
+      "MATIC": 2,
+      "JST": 2
+    },
+    "3d": {
+      "USDC": 4,
+      "JST": 2,
+      "DAI": 2,
+      "BTC": 1,
+      "ETH": 1
+    },
+    "1d": {
+      "USDC": 4,
+      "DAI": 2,
+      "BTC": 1,
+      "ETH": 1,
+      "JST": 1
+    }
+  },
+  "RomeoTrades": {
+    "3m": {
+      "ARK": 52,
+      "JST": 23,
+      "SOL": 20,
+      "AMP": 13,
+      "FLOKI": 12
+    },
+    "2m": {
+      "ARK": 41,
+      "SOL": 20,
+      "JST": 18,
+      "FLOKI": 10,
+      "AMP": 9
+    },
+    "1m": {
+      "ARK": 24,
+      "SOL": 20,
+      "JST": 12,
+      "BONK": 6,
+      "ORDI": 6
+    },
+    "2w": {
+      "SOL": 20,
+      "ARK": 11,
+      "BONK": 6,
+      "JST": 6,
+      "FLOKI": 6
+    },
+    "1w": {
+      "SOL": 10,
+      "ARK": 9,
+      "FLOKI": 6,
+      "JST": 4,
+      "BONK": 2
+    },
+    "3d": {
+      "BONK": 2,
+      "ARK": 1,
+      "SOL": 1
+    },
+    "1d": {}
+  },
+  "AlgodTrading": {
+    "3m": {
+      "ARK": 22,
+      "JST": 16,
+      "BTC": 7,
+      "ETH": 4,
+      "SOL": 4
+    },
+    "2m": {
+      "ARK": 13,
+      "JST": 11,
+      "BTC": 3,
+      "FLOW": 3,
+      "ETH": 2
+    },
+    "1m": {
+      "JST": 5,
+      "ARK": 4,
+      "BONK": 1,
+      "ETH": 1,
+      "SOL": 1
+    },
+    "2w": {
+      "ARK": 2,
+      "JST": 1,
+      "SOL": 1,
+      "BSV": 1,
+      "BCH": 1
+    },
+    "1w": {
+      "JST": 1,
+      "SOL": 1
+    },
+    "3d": {},
+    "1d": {}
+  },
+  "milesdeutscher": {
+    "3m": {
+      "ARK": 71,
+      "SOL": 66,
+      "BTC": 62,
+      "INJ": 52,
+      "JST": 51
+    },
+    "2m": {
+      "SOL": 60,
+      "ARK": 56,
+      "INJ": 52,
+      "JST": 38,
+      "AMP": 35
+    },
+    "1m": {
+      "INJ": 51,
+      "SOL": 35,
+      "ARK": 25,
+      "JST": 22,
+      "TIA": 21
+    },
+    "2w": {
+      "INJ": 36,
+      "JST": 12,
+      "TIA": 11,
+      "ATOM": 11,
+      "SOL": 10
+    },
+    "1w": {
+      "TIA": 11,
+      "ATOM": 9,
+      "BTC": 7,
+      "INJ": 6,
+      "OSMO": 6
+    },
+    "3d": {
+      "BTC": 7,
+      "TRX": 3,
+      "TIA": 2,
+      "ETH": 2,
+      "ARK": 2
+    },
+    "1d": {
+      "BTC": 5,
+      "ETH": 2,
+      "ARK": 2,
+      "TRX": 2,
+      "ORDI": 1
+    }
+  },
+  "jarzoombek": {
+    "3m": {
+      "UNI": 22,
+      "SOL": 21,
+      "ARK": 15,
+      "JST": 9,
+      "AMP": 8
+    },
+    "2m": {
+      "UNI": 22,
+      "SOL": 21,
+      "ARK": 15,
+      "JST": 9,
+      "AMP": 8
+    },
+    "1m": {
+      "UNI": 22,
+      "SOL": 21,
+      "ARK": 13,
+      "JST": 9,
+      "AMP": 8
+    },
+    "2w": {
+      "ARK": 4,
+      "AMP": 4,
+      "ACE": 3,
+      "BEAM": 2,
+      "ORDI": 1
+    },
+    "1w": {
+      "ARK": 4,
+      "AMP": 4,
+      "ACE": 3,
+      "BEAM": 2,
+      "ORDI": 1
+    },
+    "3d": {},
+    "1d": {}
+  },
+  "HsakaTrades": {
+    "3m": {
+      "JST": 7,
+      "ARK": 6,
+      "TRX": 2,
+      "SEI": 2,
+      "XEM": 2
+    },
+    "2m": {
+      "JST": 7,
+      "ARK": 6,
+      "TRX": 2,
+      "SEI": 2,
+      "XEM": 2
+    },
+    "1m": {
+      "JST": 7,
+      "ARK": 6,
+      "TRX": 2,
+      "SEI": 2,
+      "XEM": 2
+    },
+    "2w": {
+      "JST": 7,
+      "ARK": 6,
+      "TRX": 2,
+      "SEI": 2,
+      "XEM": 2
+    },
+    "1w": {
+      "SEI": 2,
+      "BTC": 1,
+      "ARK": 1,
+      "BNB": 1,
+      "XEM": 1
+    },
+    "3d": {
+      "ARK": 1
+    },
+    "1d": {
+      "ARK": 1
+    }
+  },
+  "AdamHODL": {
+    "3m": {
+      "ROSE": 9,
+      "JST": 8,
+      "ARK": 7,
+      "AMP": 5,
+      "BTC": 4
+    },
+    "2m": {
+      "ROSE": 6,
+      "JST": 5,
+      "ARK": 5,
+      "AMP": 4,
+      "SUI": 4
+    },
+    "1m": {
+      "ARK": 5,
+      "ROSE": 4,
+      "BTC": 3,
+      "AMP": 3,
+      "ETH": 2
+    },
+    "2w": {
+      "ARK": 4,
+      "BTC": 3,
+      "ETH": 2,
+      "AMP": 2,
+      "TRX": 1
+    },
+    "1w": {
+      "AMP": 2,
+      "BTC": 1,
+      "ARK": 1,
+      "TRX": 1,
+      "FLOW": 1
+    },
+    "3d": {},
+    "1d": {}
+  },
+  "degenromeo": {
+    "3m": {
+      "ARK": 8,
+      "SOL": 1,
+      "AMP": 1,
+      "CAKE": 1,
+      "KAS": 1
+    },
+    "2m": {
+      "ARK": 8,
+      "SOL": 1,
+      "AMP": 1,
+      "CAKE": 1,
+      "KAS": 1
+    },
+    "1m": {
+      "ARK": 7,
+      "AMP": 1,
+      "CAKE": 1,
+      "KAS": 1
+    },
+    "2w": {
+      "ARK": 2
+    },
+    "1w": {},
+    "3d": {},
+    "1d": {}
+  }
+}
