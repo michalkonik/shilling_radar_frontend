@@ -10,11 +10,17 @@ from concurrent.futures import ThreadPoolExecutor
 class CryptoInfluencerApp:
     def __init__(self):
         self.final_output_file_name = 'data/stats/final_output.json'
+        self.tickers_stats_file_name = "data/stats/tickers_stats.json"
+        self.last_cyclic_update_date_file_name = "data/last_cyclic_update_data/last_cyclic_update_data.json"
         with open(self.final_output_file_name) as f:
             self.influencer_data_list = json.load(f)
+        with open(self.tickers_stats_file_name) as f:
+            self.influencer_statistics = json.load(f)
+        with open(self.last_cyclic_update_date_file_name) as f:
+            self.last_cyclic_update_date = json.load(f)["last_cyclic_update_timestamp"]
 
         self.influencers_list = list({author for token in self.influencer_data_list.values() for tweet in token for author in [tweet["author"]]})
-        st.set_page_config(layout="wide")
+        st.set_page_config(page_title="Crypto Hype stats", page_icon=":money_with_wings:")
 
         self.cryptos = self.return_list_of_tickers_from_price_files()
 
@@ -111,6 +117,11 @@ class CryptoInfluencerApp:
         
     def set_tickers_from_multiselect_window(self):
         print("main page executed")
+
+        # Add hyperlink to the left sidebar for "mentions statistics" page
+        if st.sidebar.button("STATISTICS - tickers"):
+            st.experimental_set_query_params(page="mentions_statistics")
+        
         selected_tickers = st.sidebar.multiselect('# Select Cryptocurrencies (Max 8)', options=self.cryptos, default=[])
         go_button = st.sidebar.button('See selected Cryptocurrencies')
 
@@ -125,6 +136,29 @@ class CryptoInfluencerApp:
                 st.experimental_set_query_params(page=1, ticker=",".join(self.cryptos))
                 st.warning("Please select between 1 and 8 cryptocurrencies. Going to 1st page...")
 
+    def display_tickers_statistics_page(self):
+        # Convert data to DataFrame for better manipulation
+        crypto_df = pd.DataFrame(self.influencer_statistics).transpose()
+
+        # Define the desired order of columns
+        desired_columns_order = ["1d", "3d", "1w", "2w", "1m", "2m", "3m"]
+
+        # Rearrange the columns in the DataFrame
+        crypto_df = crypto_df[desired_columns_order]
+
+        st.title("Cryptocurrency Statistics")
+        st.markdown(f"<small>Last data updated: {self.last_cyclic_update_date}.</small>", unsafe_allow_html=True)
+
+        # Add option for sorting the table
+        selected_sort_option = st.selectbox("Sort table by:", desired_columns_order)
+
+        # Allow user to sort table by selected option
+        sorted_crypto_df = crypto_df.sort_values(by=selected_sort_option, ascending=False)
+
+        # Display the sorted table
+        st.table(sorted_crypto_df)
+        
+
     def run(self):
         self.set_tickers_from_multiselect_window()
 
@@ -133,64 +167,71 @@ class CryptoInfluencerApp:
 
         num_pages = -(-total_cryptos // charts_per_page)
 
-        # Read the page parameter from the URL
         url_params = st.experimental_get_query_params()
         print("url_params:")
         print(url_params)
-        selected_page = int(url_params.get('page', [1])[0])
-        print("selected_page:")
-        print(selected_page)
-        selected_tickers = url_params.get('ticker', [""])[0]
-        print("selected_tickers:")
-        print(selected_tickers)
 
-        if selected_tickers != "":
-            print("weszło")
-            self.cryptos = selected_tickers.split(',')
-
-        if len(self.cryptos) <= charts_per_page and selected_page != 1:
-            st.warning("Not many tickers selected. All fit on one page. Page number reset to 1.")
-            selected_page = 1
+        # Check if the page parameter is set to "stats"
+        if url_params.get('page', [1])[0] == "mentions_statistics":
+            # Display the mentions statistics page
+            self.display_tickers_statistics_page()
         else:
-            selected_page = st.sidebar.selectbox('Select page to see all Cryptocurrencies', range(1, num_pages + 1), index=selected_page - 1)
-        print("selected_page from selectbox:")
-        print(selected_page)
+            # Display the charts page
+            selected_page = int(url_params.get('page', [1])[0])
+            print("selected_page:")
+            print(selected_page)
+            selected_tickers = url_params.get('ticker', [""])[0]
+            print("selected_tickers:")
+            print(selected_tickers)
 
-        st.experimental_set_query_params(page=selected_page, ticker=selected_tickers)
 
-        if selected_page == 1:
-            start_index = 0
-            end_index = charts_per_page
-        else:
-            start_index = ((selected_page - 1) * charts_per_page)
-            end_index = min(start_index + charts_per_page, total_cryptos)
+            if selected_tickers != "":
+                print("weszło")
+                self.cryptos = selected_tickers.split(',')
 
-        end_index = min(end_index, total_cryptos)
+            if len(self.cryptos) <= charts_per_page and selected_page != 1:
+                st.warning("Not many tickers selected. All fit on one page. Page number reset to 1.")
+                selected_page = 1
+            else:
+                selected_page = st.sidebar.selectbox('Select page to see all Cryptocurrencies', range(1, num_pages + 1), index=selected_page - 1)
+            print("selected_page from selectbox:")
+            print(selected_page)
 
-        print("start_index:")
-        print(start_index)
-        print("end_index:")
-        print(end_index)
+            st.experimental_set_query_params(page=selected_page, ticker=selected_tickers)
 
-        # Move the page selector above the influencer selector
-        self.selected_influencers = st.sidebar.multiselect('Select Influencers', options=self.influencers_list, default=self.influencers_list)
-        print("self.selected_influencers:")
-        print(self.selected_influencers)
+            if selected_page == 1:
+                start_index = 0
+                end_index = charts_per_page
+            else:
+                start_index = ((selected_page - 1) * charts_per_page)
+                end_index = min(start_index + charts_per_page, total_cryptos)
 
-        print("self.cryptos right before multithreading:")
-        print(self.cryptos)
-        with ThreadPoolExecutor() as executor:
-            crypto_data = executor.map(self.process_crypto, self.cryptos[start_index:end_index])
+            end_index = min(end_index, total_cryptos)
 
-        print("crypto_data:")
-        print(crypto_data)
+            print("start_index:")
+            print(start_index)
+            print("end_index:")
+            print(end_index)
 
-        for crypto, price_data, influencer_data in crypto_data:
-            with st.container():
-                try:
-                    st.plotly_chart(self.generate_chart(crypto, price_data, influencer_data))
-                except AttributeError as ae:
-                    print(f"error poped up: {ae}")
+            # Move the page selector above the influencer selector
+            self.selected_influencers = st.sidebar.multiselect('Select Influencers', options=self.influencers_list, default=self.influencers_list)
+            print("self.selected_influencers:")
+            print(self.selected_influencers)
+
+            print("self.cryptos right before multithreading:")
+            print(self.cryptos)
+            with ThreadPoolExecutor() as executor:
+                crypto_data = executor.map(self.process_crypto, self.cryptos[start_index:end_index])
+
+            print("crypto_data:")
+            print(crypto_data)
+
+            for crypto, price_data, influencer_data in crypto_data:
+                with st.container():
+                    try:
+                        st.plotly_chart(self.generate_chart(crypto, price_data, influencer_data))
+                    except AttributeError as ae:
+                        print(f"error poped up: {ae}")
 
 
 app = CryptoInfluencerApp()
